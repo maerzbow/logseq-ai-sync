@@ -11,3 +11,6 @@ spec:
   resources:
     requests:
       storage: 2Gi
+  selector:
+    matchLabels:
+      service: n8n-pv0
