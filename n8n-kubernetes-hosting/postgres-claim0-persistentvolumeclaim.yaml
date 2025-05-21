@@ -12,3 +12,6 @@ spec:
   resources:
     requests:
       storage: 2Gi
+  selector:
+    matchLabels:
+      service: postgres-pv0
