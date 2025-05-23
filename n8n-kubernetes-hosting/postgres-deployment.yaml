@@ -21,7 +21,7 @@ spec:
         service: postgres-n8n
     spec:
       containers:
-        - image: pgvector/pgvector:latest
+        - image: pgvector/pgvector:pg16
           name: postgres
           resources:
             limits:
@@ -29,7 +29,7 @@ spec:
               memory: 2Gi
             requests:
               cpu: "1"
-              memory: 2Gi
+              memory: 1Gi
           ports:
             - containerPort: 5432
           volumeMounts:
