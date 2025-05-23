@@ -1,0 +1,193 @@
+{
+  "name": "Ask Google Data",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        -100
+      ],
+      "id": "06553940-49c3-4751-99ba-9b2fabb98aba",
+      "name": "When chat message received",
+      "webhookId": "0bdf5167-c6ca-4c12-82a3-4052189aae27"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You can always access the Calendar and Emails without asking"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        312,
+        -100
+      ],
+      "id": "e8e500c3-697b-43cb-b530-7d49af9e68e7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        220,
+        120
+      ],
+      "id": "efda4c49-04d3-4fe4-bb18-7415a420c741",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "9btKskAtX1bsJx6T",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "maerzbow@gmail.com",
+          "mode": "list",
+          "cachedResultName": "maerzbow@gmail.com"
+        },
+        "returnAll": true,
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        460,
+        120
+      ],
+      "id": "33b782a2-f1d6-412b-95ce-781a72109810",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "isCtqy8j2jrtXaPU",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        580,
+        120
+      ],
+      "id": "b2ba78cf-e120-447b-b910-cbdaf58f09c8",
+      "name": "Gmail",
+      "webhookId": "2c2667d6-c107-420c-b442-cf47069cd326",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "u9dHPrM1pnWDsR7l",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        340,
+        120
+      ],
+      "id": "86ee0f6c-ed66-4c65-8985-17f0b6801224",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d8858551-aaf1-43df-9812-45bacac03424",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9a31dc5c407d11969bcb21f857271a847174f9a6932aaf3c3698f279b0785c46"
+  },
+  "id": "SM5JWA01LBT0zFxw",
+  "tags": [
+    {
+      "createdAt": "2025-04-30T11:36:25.142Z",
+      "updatedAt": "2025-04-30T11:36:25.142Z",
+      "id": "agWoCk7Kh6vghtyc",
+      "name": "ai"
+    }
+  ]
+}
